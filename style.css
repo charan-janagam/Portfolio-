@@ -1,0 +1,155 @@
+/* General reset */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #0a0a0a;
+  color: #e0e0e0;
+  overflow-x: hidden;
+}
+
+/* Intro Screen */
+#intro-screen {
+  position: fixed;
+  inset: 0;
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 999;
+  transition: opacity 1s ease;
+}
+
+#binary-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+#intro-text {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #00ff99;
+  text-shadow: 0 0 10px #00ff99;
+}
+
+#intro-text h1 {
+  font-family: 'Courier New', monospace;
+  font-size: 2rem;
+  letter-spacing: 2px;
+}
+
+#intro-text p {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #0f0;
+}
+
+/* Header */
+header {
+  background: #101010;
+  padding: 15px 30px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 0 15px #00ff99;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #00ff99;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #0ff;
+}
+
+.logo {
+  color: #00ff99;
+  font-size: 1.3rem;
+}
+
+/* Sections */
+.section {
+  padding: 80px 10%;
+  text-align: center;
+}
+
+.section h2 {
+  color: #00ff99;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.project {
+  margin-bottom: 25px;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  list-style: none;
+}
+
+.skills-list li {
+  background: #101010;
+  border: 1px solid #00ff99;
+  padding: 10px 15px;
+  border-radius: 8px;
+}
+
+.resume-img {
+  width: 60%;
+  max-width: 400px;
+  border: 2px solid #00ff99;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.btn {
+  display: inline-block;
+  background: #00ff99;
+  color: black;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #0ff;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #050505;
+  color: #00ff99;
+  border-top: 1px solid #00ff99;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  nav ul { flex-direction: column; align-items: center; }
+  .resume-img { width: 90%; }
+}
