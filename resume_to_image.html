@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Janagam Sri chaRAN — Resume to Image</title>
+<style>
+  :root{
+    --bg:#0b0b0b; --fg:#eaeaea; --accent:#00ff99; --muted:#b9b9b9;
+  }
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+  .wrap{max-width:900px;margin:0 auto;padding:16px}
+  .card{background:#101010;border:1px solid #1c1c1c;border-radius:12px;box-shadow:0 0 24px rgba(0,0,0,.35);padding:16px}
+  h1{font-size:20px;margin:0 0 6px 0;color:var(--accent)}
+  .sub{color:var(--muted);margin:0 0 16px 0}
+  .btns{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 16px}
+  button,.btn{
+    background:var(--accent);color:#000;border:none;border-radius:8px;
+    padding:10px 14px;font-weight:700;cursor:pointer
+  }
+  button:hover{filter:brightness(1.05)}
+  .preview{display:block;width:100%;background:#0a0a0a;border:1px solid #222;border-radius:8px}
+  .hint{color:var(--muted);font-size:12px;margin-top:8px}
+  /* For the SVG text styling */
+  .title{font:700 28px system-ui,-apple-system,Segoe UI,Roboto,Arial}
+  .line{font:400 14px system-ui,-apple-system,Segoe UI,Roboto,Arial}
+  .head{font:700 18px system-ui,-apple-system,Segoe UI,Roboto,Arial; fill:#00ff99}
+  .body{font:400 14px system-ui,-apple-system,Segoe UI,Roboto,Arial}
+  .small{font:400 13px system-ui,-apple-system,Segoe UI,Roboto,Arial}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Resume → JPG Export</h1>
+      <p class="sub">Tap “Save JPG” to download an image of your resume. (Works offline; no external libraries.)</p>
+      <div class="btns">
+        <button id="saveJpgBtn">Save JPG</button>
+        <button id="savePngBtn" style="background:#0ff">Save PNG</button>
+      </div>
+      <canvas id="preview" class="preview" aria-label="Resume preview"></canvas>
+      <p class="hint">If the download prompt doesn’t appear, long-press the image after saving to gallery, or try another browser (Chrome works best).</p>
+    </div>
+  </div>
+
+<script>
+/* ==== CONFIG ==== */
+const cfg = {
+  width: 1240,   // ~A4 at 150–160 DPI width
+  height: 1754,  // ~A4 aspect height
+  padding: 64,
+  bg: "#0b0b0b",
+  fg: "#eaeaea",
+  accent: "#00ff99",
+};
+
+function resumeSVG(){
+  const p = cfg.padding;
+  const col = {
+    x: p, w: (cfg.width - p*2)
+  };
+  let y = p;
+
+  // helper to add text blocks
+  const line = (t, dy=22, cls="body") => {
+    y += dy;
+    return `<text x="${col.x}" y="${y}" class="${cls}" fill="${cls==='head'?cfg.accent:cfg.fg}">${escapeXml(t)}</text>`;
+  };
+  const head = (t) => line(t, 30, "head");
+
+  // build content
+  let out = "";
+  // name block
+  out += `<text x="${col.x}" y="${y+5}" class="title" fill="${cfg.accent}">Janagam Sri chaRAN</text>`; y += 36;
+  out += line("Thallavellamla (V), Chityala (M), Nalgonda (D), Telangana", 22, "small");
+  out += line("Email: charan6401@gmail.com", 20, "small");
+
+  // divider
+  y += 10; out += `<rect x="${col.x}" y="${y}" width="${col.w}" height="1" fill="#1f1f1f"/>`; y += 14;
+
+  // Objective
+  head("Objective");
+  out += line("Aspiring software developer passionate about AI and coding.", 24);
+  out += line("Dedicated to learning modern programming tools and building intelligent web systems.", 20);
+
+  // Skills
+  head("Technical Skills");
+  out += bullet([
+    "Languages: C++, Python",
+    "Web: HTML, CSS, JavaScript",
+    "Deployment & Tools: Online hosting/deployment platforms",
+    "Interests: AI-based applications and chatbot systems"
+  ]);
+
+  // Projects
+  head("Projects");
+  out += bullet([
+    "Portfolio Website — 'The Digital Alchemist': Designed and deployed a cinematic, hacker-themed portfolio using HTML, CSS, and JS.",
+    "AI Chatbot System: Built a simple chatbot app connected to an API backend for conversational responses."
+  ]);
+
+  // Education
+  head("Education");
+  out += line("Sri Rama Idea College — Intermediate 1st Year, MPC Stream", 24);
+  out += line("Actively learning and developing technical and creative skills in software & web development.", 20);
+
+  // Interests
+  head("Interests");
+  out += bullet([
+    "Web Application Design",
+    "AI Systems and Automation",
+    "Coding Challenges and Experiments"
+  ]);
+
+  // build final SVG
+  return `
+<svg xmlns="http://www.w3.org/2000/svg" width="${cfg.width}" height="${cfg.height}">
+  <defs>
+    <style>
+      .title{font:700 42px system-ui,-apple-system,Segoe UI,Roboto,Arial}
+      .head{font:700 22px system-ui,-apple-system,Segoe UI,Roboto,Arial}
+      .body{font:400 16px system-ui,-apple-system,Segoe UI,Roboto,Arial}
+      .small{font:400 15px system-ui,-apple-system,Segoe UI,Roboto,Arial}
+    </style>
+  </defs>
+  <rect x="0" y="0" width="${cfg.width}" height="${cfg.height}" fill="${cfg.bg}"/>
+  ${out}
+</svg>`;
+
+  // helpers
+  function bullet(items){
+    let s = "";
+    items.forEach(txt=>{
+      y += 24;
+      s += `<circle cx="${col.x+6}" cy="${y-6}" r="3" fill="${cfg.accent}"/>`;
+      s += `<text x="${col.x+16}" y="${y}" class="body" fill="${cfg.fg}">${escapeXml(txt)}</text>`;
+    });
+    y += 6;
+    return s;
+  }
+  function escapeXml(str){
+    return String(str)
+      .replace(/&/g,"&amp;").replace(/</g,"&lt;")
+      .replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&apos;");
+  }
+}
+
+/* ==== RENDER TO CANVAS ==== */
+const canvas = document.getElementById('preview');
+const ctx = canvas.getContext('2d');
+
+function drawSVGToCanvas(format="jpg"){
+  const svg = resumeSVG();
+  const img = new Image();
+  const svgUrl = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  img.onload = () => {
+    canvas.width = cfg.width;
+    canvas.height = cfg.height;
+    // background
+    ctx.fillStyle = cfg.bg;
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    // draw svg
+    ctx.drawImage(img, 0, 0);
+    // if format requested, trigger download immediately
+    if(format) downloadCanvas(format);
+  };
+  img.src = svgUrl;
+}
+
+function downloadCanvas(format="jpg"){
+  const mime = (format==="png") ? "image/png" : "image/jpeg";
+  const quality = (format==="png") ? 1.0 : 0.95;
+  const dataUrl = canvas.toDataURL(mime, quality);
+  const a = document.createElement('a');
+  a.href = dataUrl;
+  a.download = `Janagam_Sri_chaRAN_Resume.${format}`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+}
+
+document.getElementById('saveJpgBtn').addEventListener('click', ()=>drawSVGToCanvas("jpg"));
+document.getElementById('savePngBtn').addEventListener('click', ()=>drawSVGToCanvas("png"));
+
+// Render a preview at start (no auto-download)
+(function initPreview(){
+  const svg = resumeSVG();
+  const img = new Image();
+  img.onload = ()=>{
+    canvas.width = cfg.width; canvas.height = cfg.height;
+    ctx.fillStyle = cfg.bg; ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.drawImage(img,0,0);
+  };
+  img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+})();
+</script>
+</body>
+  </html>
