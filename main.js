@@ -1,50 +1,55 @@
-// Binary rain effect
-const canvas = document.getElementById('binary-canvas');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+const canvas = document.getElementById("binary-canvas");
+const ctx = canvas.getContext("2d");
 
-const letters = Array(256).join("1").split("");
-function drawMatrix() {
-  ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "#0f0";
-  letters.map((y_pos, index) => {
-    const text = String.fromCharCode(48 + Math.random() * 33);
-    const x_pos = index * 10;
-    ctx.fillText(text, x_pos, y_pos);
-    letters[index] = y_pos > 758 + Math.random() * 1e4 ? 0 : y_pos + 10;
-  });
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 }
-setInterval(drawMatrix, 50);
+resize();
+window.addEventListener("resize", resize);
 
-// Typewriter effect
-const typedText = document.getElementById("typed-text");
-const welcomeText = document.getElementById("welcome-text");
-const introScreen = document.getElementById("intro-screen");
-const textSequence = ["Janagam Sri chaRAN", "The Digital Alchemist"];
+const cols = Math.floor(canvas.width / 14);
+const drops = Array(cols).fill(0);
 
-let index = 0, charIndex = 0;
-function typeWriter() {
-  if (charIndex < textSequence[index].length) {
-    typedText.textContent += textSequence[index].charAt(charIndex);
-    charIndex++;
-    setTimeout(typeWriter, 100);
-  } else if (index < textSequence.length - 1) {
-    setTimeout(() => {
-      typedText.textContent = "";
-      index++;
-      charIndex = 0;
-      typeWriter();
-    }, 800);
-  } else {
-    setTimeout(() => {
-      welcomeText.textContent = "> unauthorized curiosity detected... welcome.";
-      setTimeout(() => {
-        introScreen.style.opacity = "0";
-        setTimeout(() => introScreen.remove(), 1000);
-      }, 1200);
-    }, 800);
+function draw() {
+  ctx.fillStyle = "rgba(0,0,0,0.08)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "#00ff99";
+  ctx.font = "14px monospace";
+
+  for (let i = 0; i < drops.length; i++) {
+    const text = Math.random() > 0.5 ? "0" : "1";
+    ctx.fillText(text, i * 14, drops[i] * 18);
+
+    if (drops[i] * 18 > canvas.height && Math.random() > 0.98) {
+      drops[i] = 0;
+    }
+    drops[i]++;
   }
 }
-window.onload = typeWriter;
+setInterval(draw, 50);
+
+// Intro typing
+const title = "Janagam Sri chaRAN";
+const subtitle = "Student Developer | Learning by Building";
+
+let i = 0;
+const typedText = document.getElementById("typed-text");
+const welcomeText = document.getElementById("welcome-text");
+
+function type() {
+  if (i <= title.length) {
+    typedText.textContent = title.slice(0, i++);
+    setTimeout(type, 80);
+  } else {
+    welcomeText.textContent = subtitle;
+    setTimeout(() => {
+      document.getElementById("intro-screen").style.opacity = "0";
+      setTimeout(() => {
+        document.getElementById("intro-screen").style.display = "none";
+      }, 800);
+    }, 700);
+  }
+}
+type();
