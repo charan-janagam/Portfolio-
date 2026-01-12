@@ -3,212 +3,113 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>The Digital Alchemist | Janagam Sri chaRAN</title>
-<meta name="description" content="Janagam Sri chaRAN - Aspiring Software Developer passionate about AI and coding.">
-<style>
-  :root{
-    --bg:#0b0b0b; --panel:#121212; --text:#e9f9f1; --muted:#a3b9b0; --accent:#00ff99; --accent2:#00d4ff;
-    --border:rgba(0,255,153,.2); --shadow:0 0 24px rgba(0,255,153,.25), inset 0 0 12px rgba(0,255,153,.08);
-  }
-  *{box-sizing:border-box}
-  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;scroll-behavior:smooth}
-  a{color:var(--accent);text-decoration:none}
-  img{max-width:100%;height:auto;border-radius:12px}
-  /* Intro */
-  #intro-screen{position:fixed;inset:0;background:#000;display:grid;place-items:center;z-index:9999}
-  #binary-canvas{position:absolute;inset:0}
-  #intro-text{text-align:center;padding:24px}
-  #typed-text{color:var(--accent);font-size:clamp(28px,7vw,54px);margin:0 0 8px 0;text-shadow:0 0 18px rgba(0,255,153,.6)}
-  #welcome-text{color:#cde9df;font-size:clamp(14px,3.5vw,18px);opacity:.9}
-  /* Header */
-  header{position:sticky;top:0;backdrop-filter:blur(6px);background:linear-gradient(180deg,rgba(0,0,0,.85),rgba(0,0,0,.35) 70%,transparent);border-bottom:1px solid var(--border);z-index:10}
-  nav{max-width:1000px;margin:auto;padding:14px 18px;display:flex;align-items:center;justify-content:center}
-  .logo{margin:0;color:var(--accent);font-weight:800;letter-spacing:.3px}
-  /* Sections */
-  main{max-width:1000px;margin:0 auto;padding:28px 18px 60px}
-  .section{padding:56px 0;border-bottom:1px solid var(--border)}
-  .section h2{font-size:clamp(22px,4.8vw,36px);margin:0 0 14px 0;color:var(--accent)}
-  .section p{color:var(--muted);line-height:1.7}
-  ul{margin:10px 0 0 18px}
-  li{margin:8px 0}
-  /* Project cards */
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:18px}
-  .card{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:18px;box-shadow:var(--shadow);position:relative;overflow:hidden;transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease}
-  .card:hover{transform:translateY(-4px);box-shadow:0 10px 32px rgba(0,255,153,.25);border-color:rgba(0,255,153,.45)}
-  .card h3{margin:6px 0 6px 0}
-  .desc{color:var(--muted);margin:8px 0 14px}
-  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
-  .tag{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid var(--border);background:rgba(0,255,153,.06)}
-  .actions{display:flex;gap:10px;flex-wrap:wrap}
-  .btn{display:inline-block;padding:10px 14px;border-radius:12px;border:1px solid var(--border);background:transparent;color:var(--text);transition:.25s}
-  .btn:hover{box-shadow:0 0 16px rgba(0,255,153,.35);border-color:rgba(0,255,153,.45)}
-  .btn.primary{background:linear-gradient(135deg,rgba(0,255,153,.2),rgba(0,212,255,.18));border-color:rgba(0,255,153,.5)}
-  /* Resume */
-  .resume-img{border:1px solid var(--border);box-shadow:var(--shadow)}
-  footer{padding:24px 16px;text-align:center;color:#8fb1a5}
-</style>
+<title>Janagam Sri chaRAN | Student Developer</title>
+<meta name="description" content="Janagam Sri chaRAN – Student developer learning programming, web development, and AI tools.">
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <!-- Binary Rain Intro -->
-  <div id="intro-screen">
-    <canvas id="binary-canvas"></canvas>
-    <div id="intro-text">
-      <h1 id="typed-text"></h1>
-      <p id="welcome-text"></p>
-    </div>
+
+<!-- Intro -->
+<div id="intro-screen">
+  <canvas id="binary-canvas"></canvas>
+  <div id="intro-text">
+    <h1 id="typed-text"></h1>
+    <p id="welcome-text"></p>
+  </div>
+</div>
+
+<header>
+  <nav>
+    <h2 class="logo">Janagam Sri chaRAN</h2>
+  </nav>
+</header>
+
+<main>
+
+<!-- About -->
+<section class="section">
+  <h2>About Me</h2>
+  <p>
+    Hi, I’m <strong>Janagam Sri chaRAN</strong>, a student developer currently studying
+    <strong>Intermediate 1st Year (MPC)</strong>.
+  </p>
+  <p>
+    I’m learning programming step by step by building small projects, deploying them,
+    breaking things, fixing them, and understanding how real systems work.
+  </p>
+  <p>
+    I focus more on <strong>learning by doing</strong> than claiming expertise.
+  </p>
+</section>
+
+<!-- Projects -->
+<section class="section">
+  <h2>Projects</h2>
+
+  <div class="project">
+    <h3>AI Chatbot (Learning Project)</h3>
+    <p>
+      A chatbot built using Python and Flask that connects to open-source AI models.
+      This project helped me learn backend APIs, deployment on Render, CORS, streaming
+      responses, and debugging real deployment issues.
+    </p>
+    <p><strong>Tech used:</strong> Python, Flask, OpenRouter API, Render</p>
+    <a class="btn" href="https://sri-charans-ai-asisstant.onrender.com" target="_blank">
+      Open Project
+    </a>
   </div>
 
-  <!-- Header (no menu links) -->
-  <header>
-    <nav><h2 class="logo">The Digital Alchemist</h2></nav>
-  </header>
+  <div class="project">
+    <h3>Personal Portfolio Website</h3>
+    <p>
+      This website itself is a project. I built it to practice frontend structure,
+      styling, animations, and deployment.
+    </p>
+    <p><strong>Tech used:</strong> HTML, CSS, JavaScript</p>
+  </div>
+</section>
 
-  <main>
-    <!-- About -->
-    <section id="about" class="section">
-      <h2>About Me</h2>
-      <p>Hey there 👋 I'm <strong>Janagam Sri chaRAN</strong> — <em>The Digital Alchemist</em>. I love turning ideas into working systems that blend <strong>creativity</strong> and <strong>logic</strong>.</p>
-      <p>I’m currently in <strong>Intermediate 1st Year (MPC)</strong> at <strong>Sri Rama Idea College</strong>, sharpening problem-solving and computational thinking while building real projects.</p>
-      <p>Interests:</p>
-      <ul>
-        <li>🧠 Artificial Intelligence & learning systems</li>
-        <li>💻 Software & logic building in C++/Python</li>
-        <li>🌐 Futuristic, cinematic web experiences</li>
-        <li>🤖 Chatbot engineering & APIs</li>
-      </ul>
-    </section>
+<!-- Skills -->
+<section class="section">
+  <h2>Skills & Knowledge</h2>
 
-    <!-- Projects (Cards) -->
-    <section id="projects" class="section">
-      <h2>Projects</h2>
-      <div class="grid">
-        <!-- Chatbot Project (with your link) -->
-        <article class="card">
-          <h3>AI Chatbot Assistant</h3>
-          <p class="desc">A Python-backed chatbot with a simple API that responds intelligently to user queries. Deployed on Render.</p>
-          <div class="tags">
-            <span class="tag">Python</span><span class="tag">Flask/FastAPI</span><span class="tag">Render</span><span class="tag">LLM</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://sri-charans-ai-asisstant.onrender.com" target="_blank" rel="noopener">Open App</a>
-          </div>
-        </article>
+  <ul class="skills-list">
+    <li>C language – solid basics</li>
+    <li>Python – learning backend & scripting</li>
+    <li>HTML, CSS – frontend structure & styling</li>
+    <li>Basic JavaScript – interactivity</li>
+    <li>Flask – simple backend APIs</li>
+    <li>GitHub – pushing, updating, managing repos</li>
+    <li>Render – deploying web apps</li>
+    <li>Termux – basic usage & environment setup</li>
+    <li>Open-source AI tools – usage & integration</li>
+  </ul>
+</section>
 
-        <!-- Portfolio -->
-        <article class="card">
-          <h3>The Digital Alchemist (This Site)</h3>
-          <p class="desc">Personal portfolio with hacker-style aesthetics, binary intro, and responsive design. Built with vanilla HTML/CSS/JS.</p>
-          <div class="tags">
-            <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">UI/UX</span>
-          </div>
-          <div class="actions">
-            <a class="btn" href="#about">About</a>
-            <a class="btn" href="#contact">Contact</a>
-          </div>
-        </article>
+<!-- Learning -->
+<section class="section">
+  <h2>What I’m Learning Now</h2>
+  <p>
+    Improving Python skills, understanding backend architecture,
+    learning how frontend and backend connect,
+    and building more small but real projects.
+  </p>
+</section>
 
-        <!-- Placeholder / Next project -->
-        <article class="card">
-          <h3>Upcoming: ML Playground</h3>
-          <p class="desc">A mini lab to experiment with datasets, training loops, and visualizations — learning ML the practical way.</p>
-          <div class="tags">
-            <span class="tag">Python</span><span class="tag">Numpy</span><span class="tag">Matplotlib</span>
-          </div>
-          <div class="actions">
-            <a class="btn" href="#skills">See Skills</a>
-          </div>
-        </article>
-      </div>
-    </section>
+<!-- Contact -->
+<section class="section">
+  <h2>Contact</h2>
+  <p>Email: <a href="mailto:charan6401@gmail.com">charan6401@gmail.com</a></p>
+  <p>Location: Telangana, India</p>
+</section>
 
-    <!-- Skills -->
-    <section id="skills" class="section">
-      <h2>Skills</h2>
-      <p>My current stack — growing every week:</p>
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
-        <article class="card">
-          <h3>💻 Programming</h3>
-          <ul>
-            <li>C++ — strong logic & problem solving</li>
-            <li>Python — AI, automation, chatbots</li>
-            <li>JavaScript — interactivity</li>
-          </ul>
-        </article>
-        <article class="card">
-          <h3>🎨 Web</h3>
-          <ul>
-            <li>HTML5, CSS3, responsive design</li>
-            <li>UI/UX with a cinematic hacker vibe</li>
-          </ul>
-        </article>
-        <article class="card">
-          <h3>🧩 Tools & Deploy</h3>
-          <ul>
-            <li>Render (hosting)</li>
-            <li>GitHub (version control)</li>
-            <li>VS Code (editor)</li>
-          </ul>
-        </article>
-        <article class="card">
-          <h3>🚀 Learning</h3>
-          <ul>
-            <li>APIs & backend integration</li>
-            <li>Machine Learning basics</li>
-            <li>Micro-projects & animations</li>
-          </ul>
-        </article>
-      </div>
-    </section>
+</main>
 
-    <!-- Resume -->
-    <section id="resume" class="section">
-      <h2>Resume</h2>
-      <img src="assets/Janagam_Sri_chaRAN_Resume.jpg" alt="Resume preview" class="resume-img"/>
-      <p><a class="btn" href="assets/Janagam_Sri_chaRAN_Resume.jpg" download>Download Resume</a></p>
-    </section>
+<footer>
+  <p>© 2025 Janagam Sri chaRAN</p>
+</footer>
 
-    <!-- Contact -->
-    <section id="contact" class="section">
-      <h2>Contact</h2>
-      <p>Let’s build something together.</p>
-      <p>📧 <a href="mailto:charan6401@gmail.com">charan6401@gmail.com</a></p>
-      <p>🌍 Telangana,Nalgonda,chityala,thallavellamla,India</p>
-    </section>
-  </main>
-
-  <footer>
-    <p>© 2025 Janagam Sri chaRAN — The Digital Alchemist</p>
-  </footer>
-
-<script>
-/* ===== Binary rain intro + typing ===== */
-(function(){
-  const canvas=document.getElementById('binary-canvas');
-  const ctx=canvas.getContext('2d');
-  let w,h,cols,ypos;
-  const resize=()=>{w=canvas.width=innerWidth;h=canvas.height=innerHeight;cols=Math.floor(w/14);ypos=Array(cols).fill(0);}
-  resize(); addEventListener('resize',resize);
-  function draw(){
-    ctx.fillStyle='rgba(0,0,0,0.08)'; ctx.fillRect(0,0,w,h);
-    ctx.fillStyle='#00ff99'; ctx.font='14px monospace';
-    for(let i=0;i<cols;i++){
-      const text = Math.random()>0.5 ? '0':'1';
-      ctx.fillText(text,i*14,ypos[i]*18);
-      if(ypos[i]*18 > h && Math.random() > 0.975) ypos[i]=0;
-      ypos[i]++;
-    }
-    requestAnimationFrame(draw);
-  }
-  draw();
-
-  const title="The Digital Alchemist";
-  const welcome="Crafting logic, design, and intelligence.";
-  const tEl=document.getElementById('typed-text');
-  const wEl=document.getElementById('welcome-text');
-  let i=0;
-  const type=()=>{ if(i<=title.length){ tEl.textContent=title.slice(0,i++); setTimeout(type,70); } else { wEl.textContent=welcome; setTimeout(()=>{ document.getElementById('intro-screen').style.opacity='0'; document.getElementById('intro-screen').style.transition='opacity .8s ease'; setTimeout(()=>{ document.getElementById('intro-screen').style.display='none'; },820); },900);} }
-  type();
-})();
-</script>
+<script src="main.js"></script>
 </body>
-                                                                                                                  </html>
+  </html>
